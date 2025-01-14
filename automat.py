@@ -63,4 +63,5 @@ def udbetal():
     return til_udbetaling
 
 def doner():
-
+    organisationer = "CARE Danmark","Muskelsvindfonden","Røde kors",
+    print("Vil du doner til ")
