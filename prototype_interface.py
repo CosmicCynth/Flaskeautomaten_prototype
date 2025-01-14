@@ -1,4 +1,8 @@
+from itertools import count
+
 import automat
+from automat import beregn_session_total
+
 
 # Denne funktion samler al information til brugeren i en tekst
 def generer_bruger_info():
@@ -6,11 +10,21 @@ def generer_bruger_info():
 
 # Denne funktion genererer information om sessionens afleverede flasker
 def generer_flaske_info():
-    return automat.session
+    return beregn_session_total()
 
 # Denne funktion genererer teksten til udskrift på kvittering
-def generer_kvittering_tekst():
-    return automat.beregn_session_total()
+def generer_kvittering_total():
+    for type in automat.pantdata.keys():
+        if type in automat.session:
+            print(automat.pantdata[type]['info'] + ' ' + str(automat.session.count(type)) + ' x ' + str(automat.pantdata[type]['takst']) + 'kr.')
+    out = ""
+    for type in automat.pantdata.keys():
+        out += type
+        out += str(automat.session.count(type))
+        out += automat.session.count(type) * str(automat.pantdata[type]['takst'])
+    svar = 'total værdi udbetalt ' + str(automat.beregn_session_total()) + 'kr.'
+    print(svar)
+
 
 if __name__ == '__main__':
     aktiv = True
@@ -21,8 +35,8 @@ if __name__ == '__main__':
         # Simuleret pantindkast/udbetal-tryk
         handling = input('Indkast pant eller udbetal. ')
 
-        if handling == '':
-            print(generer_kvittering_tekst())
+        if handling == 'udbetal' or handling == "UDBETAL":
+            print(str(generer_kvittering_total()))
             automat.udbetal()
 
         elif (handling.upper() in automat.pantdata.keys()):

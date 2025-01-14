@@ -2,15 +2,15 @@
 pantdata = {
         'A': {
             'takst': 1.00,
-            'info': 'Glasflasker på 0,5 liter'
+            'info': 'Glasflasker på 0,5 liter\n'
         },
         'B': {
             'takst': 1.50,
-            'info': 'Plastflasker under 1 liter'
+            'info': 'Plastflasker under 1 liter\n'
         },
         'C': {
             'takst': 3.00,
-            'info': 'Glasflasker over 0,5 liter eller plastflasker på 1 liter eller derover'
+            'info': 'Glasflasker over 0,5 liter\n eller plastflasker på 1 liter eller derover'
         }
     }
 
@@ -50,12 +50,17 @@ def opstart():
 # Beregner den totale værdi af de pantede enheder i den aktive session
 def beregn_session_total():
     total = 0
+    antal = 0
     for enhed in session:
         total += pantdata[enhed]['takst']
-    return total
+        antal = antal + 1
+    return total, antal
 
 # Denne funktion nulstiller den nuværende session og returnerer beløbet til udbetaling
 def udbetal():
     til_udbetaling = beregn_session_total()
     session.clear()
     return til_udbetaling
+
+def doner():
+
