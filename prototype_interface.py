@@ -31,13 +31,15 @@ if __name__ == '__main__':
     automat.opstart()
     while aktiv:
         print(generer_bruger_info())
-
+        handlingDisabled = False
         # Simuleret pantindkast/udbetal-tryk
+
         handling = input('Indkast pant eller udbetal. ')
 
         if handling == 'udbetal' or handling == "UDBETAL":
             print(str(generer_kvittering_total()))
             automat.udbetal()
+            automat.doner()
 
         elif (handling.upper() in automat.pantdata.keys()):
             automat.modtag(handling)

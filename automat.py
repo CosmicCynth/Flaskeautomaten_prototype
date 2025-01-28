@@ -63,5 +63,15 @@ def udbetal():
     return til_udbetaling
 
 def doner():
-    organisationer = "CARE Danmark","Muskelsvindfonden","Røde kors",
-    print("Vil du doner til ")
+    donerSvar = input("Vil du doner til CARE Danmark, Muskelsvindfonden eller Røde kors?")
+    donerSvar = donerSvar.upper()
+    if donerSvar == "JA":
+        hvilkenOrg = input("Hvilken organisation vil du doner til?")
+        hvilkenOrg = hvilkenOrg.upper()
+        if hvilkenOrg == "CARE DANMARK" or "MUSKELSVINDFONDEN" or "RØDE KORS":
+            print("Du har doneret dit beløb til: "+str(hvilkenOrg))
+        else:
+            print("Ugyldig organisation")
+    else:
+        print("goddag")
+#Note til selv check om user siger ja eller nej også skriv respond
